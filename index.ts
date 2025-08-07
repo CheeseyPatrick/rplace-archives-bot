@@ -5,6 +5,9 @@ import { Events } from "discord.js";
 import { promises as fs } from "fs";
 import { glob } from "glob";
 import { promisify } from "util";
+import { config } from "dotenv";
+
+config();
 
 async function cleanDirectories() {
   const patterns = ["./frames/**", "./videos/**"];
