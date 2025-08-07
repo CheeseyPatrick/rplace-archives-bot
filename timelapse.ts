@@ -47,7 +47,7 @@ export async function sixtySecondTimelapse() {
   try {
     console.log("Processing video ", currentMinute);
     const { stdout, stderr } = await execPromise(
-      `${ffmpegPath.path} -y -framerate 1 -start_number 1 -i ./frames/frame_${currentMinute}_%06d.png -frames:v 60 -c:v libx264 -pix_fmt yuv444p -crf 15 ${outputPath}`
+      `"${ffmpegPath.path}" -y -framerate 1 -start_number 1 -i ./frames/frame_${currentMinute}_%06d.png -frames:v 60 -c:v libx264 -pix_fmt yuv444p -crf 15 ${outputPath}`
     );
 
     console.log("ffmpeg stdout: ", stdout);
