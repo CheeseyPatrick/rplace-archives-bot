@@ -20,10 +20,10 @@ client.login(process.env.TOKEN);
 
 export async function sendVideo(
   videoPath: string,
+  date: Date = new Date(),
   channelID: Snowflake = spammedChannelID
 ) {
-  const now = new Date();
-  const content = `${time(now)}\n${timestamp(now)}`;
+  const content = `${time(date)}\n${timestamp(date)}`;
 
   const channel = await client.channels.fetch(channelID);
   if (channel && channel.isSendable()) {
@@ -36,7 +36,7 @@ export async function sendVideo(
 
       return true;
     } catch (err) {
-      console.error(`Failed to send message ${time(now)}: ${err}`);
+      console.error(`Failed to send message ${time(date)}: ${err}`);
       return false;
     }
   }

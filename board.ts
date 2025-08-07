@@ -3,10 +3,22 @@ import { RPLACE_PALETTE } from "./constants";
 import { writeFile } from "fs/promises";
 import fetch from "node-fetch";
 
-export async function getBoard() {
+async function fetchBoard() {
   const resp = await fetch("https://server.rplace.live/public/place");
   const arrayBuffer = await resp.arrayBuffer();
   return new Uint8Array(arrayBuffer);
+}
+
+export async function getBoard() {
+  try {
+    return await fetchBoard();
+  } catch {
+    try {
+      return await fetchBoard();
+    } catch (err) {
+      throw new Error("Request failed after a retry: ", err);
+    }
+  }
 }
 
 export async function renderBoard(board: Uint8Array) {

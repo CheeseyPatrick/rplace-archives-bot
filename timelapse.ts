@@ -27,6 +27,7 @@ async function deleteFrames(currentMinute: number) {
 export async function sixtySecondTimelapse() {
   const now = new Date();
   const currentMinute = now.getMinutes();
+  console.log("Creating timelapse ", currentMinute);
 
   let files = [] as string[];
 
@@ -61,8 +62,3 @@ export async function sixtySecondTimelapse() {
     return null;
   }
 }
-
-// test script
-console.log("Starting 60 second timelapse...");
-const path = await sixtySecondTimelapse();
-console.log("Timelapse saved to ", path);
