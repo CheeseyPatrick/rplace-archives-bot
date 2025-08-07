@@ -8,6 +8,9 @@ import {
 } from "discord.js";
 import { spammedChannelID } from "./constants";
 import { time, timestamp } from "./utils";
+import { config } from "dotenv";
+
+config();
 
 export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
