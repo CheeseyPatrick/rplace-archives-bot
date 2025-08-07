@@ -9,6 +9,8 @@ import {
 import { spammedChannelID } from "./constants";
 import { time, timestamp } from "./utils";
 import { config } from "dotenv";
+import cron from "node-cron";
+import { sixtySecondTimelapse } from "./timelapse";
 
 config();
 
@@ -17,6 +19,18 @@ export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, async (client) => {
   console.log(`Ready! Logged in as ${client.user.tag}`);
   client.user.setActivity("rplace.live", { type: ActivityType.Watching });
+
+  cron.schedule("0 * * * * *", async () => {
+    console.log("Starting video creation");
+
+    await new Promise((resolve) => setTimeout(resolve, 1));
+    const now = new Date();
+
+    const videoPath = await sixtySecondTimelapse();
+    if (!videoPath) return;
+
+    await sendVideo(videoPath, now);
+  });
 });
 
 client.login(process.env.TOKEN);

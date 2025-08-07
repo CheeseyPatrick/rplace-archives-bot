@@ -1,6 +1,4 @@
-import cron from "node-cron";
-import { sixtySecondTimelapse } from "./timelapse";
-import { sendVideo, client } from "./bot";
+import "./bot";
 import { Events } from "discord.js";
 import { promises as fs } from "fs";
 import { glob } from "glob";
@@ -23,24 +21,6 @@ async function cleanDirectories() {
 
 async function main() {
   await cleanDirectories();
-
-  cron.schedule("0 * * * * *", async () => {
-    // runs at 0 seconds of every minute
-    if (!client.isReady()) {
-      await new Promise<void>((resolve) => {
-        // 🤮
-        client.once(Events.ClientReady, () => resolve());
-      });
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 1));
-    const now = new Date();
-
-    const videoPath = await sixtySecondTimelapse();
-    if (!videoPath) return;
-
-    await sendVideo(videoPath, now);
-  });
 }
 
 main();
