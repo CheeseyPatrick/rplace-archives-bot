@@ -11,7 +11,11 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "canvas": "^3.1.2",
-    "discord.js": "^14.21.0"
+    "discord.js": "^14.21.0",
+    "glob": "^11.0.3",
+    "node-cron": "^4.2.1",
+    "node-fetch": "^3.3.2"
   }
 }

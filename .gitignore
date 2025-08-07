@@ -1,4 +1,8 @@
 config.json
 node_modules/
-timelapses/*
-!timelapses/.gitkeep
+
+frames/*
+!frames/.gitkeep
+
+videos/*
+!videos/.gitkeep

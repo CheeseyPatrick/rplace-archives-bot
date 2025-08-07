@@ -7,7 +7,7 @@ import {
   Snowflake,
 } from "discord.js";
 import { spammedChannelID } from "./constants";
-import { rm } from "fs/promises";
+import { time, timestamp } from "./utils";
 
 export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -16,25 +16,7 @@ client.once(Events.ClientReady, async (client) => {
   client.user.setActivity("rplace.live", { type: ActivityType.Watching });
 });
 
-client.login(process.env.TOKEN).then((_) => {});
-
-export function time(date: Date) {
-  return date.toLocaleString("en-US", {
-    // "8/6/2025, 10:02 PM"
-    timeZone: "America/New_York",
-    month: "numeric",
-    day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  });
-}
-
-export function timestamp(date: Date) {
-  const unixTimestamp = Math.floor(date.getTime() / 1000);
-  return `<t:${unixTimestamp}>`;
-}
+client.login(process.env.TOKEN);
 
 export async function sendVideo(
   videoPath: string,

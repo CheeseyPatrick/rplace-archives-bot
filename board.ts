@@ -1,6 +1,7 @@
 import { createCanvas } from "canvas";
 import { RPLACE_PALETTE } from "./constants";
 import { writeFile } from "fs/promises";
+import fetch from "node-fetch";
 
 export async function getBoard() {
   const resp = await fetch("https://server.rplace.live/public/place");
@@ -31,8 +32,3 @@ export async function renderBoard(board: Uint8Array) {
   ctx.putImageData(imageData, 0, 0);
   return canvas.toBuffer();
 }
-
-// test script
-const board = await getBoard();
-const image = await renderBoard(board);
-await writeFile("./canvas.png", image);
